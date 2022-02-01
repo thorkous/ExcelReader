@@ -1,5 +1,5 @@
 CREATE TABLE `exceltable` (
-  `uuid` varchar(45) NOT NULL,
+  `id` varchar(45) NOT NULL,
   `ticker` varchar(45) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `time` varchar(45) DEFAULT NULL,
@@ -9,5 +9,5 @@ CREATE TABLE `exceltable` (
   `close` varchar(45) DEFAULT NULL,
   `volume` varchar(45) DEFAULT NULL,
   `open_interest` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`uuid`)
+  PRIMARY KEY (`id`)
 )

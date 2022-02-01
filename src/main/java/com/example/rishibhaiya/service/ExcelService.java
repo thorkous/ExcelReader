@@ -35,9 +35,7 @@ public class ExcelService {
 
             while ((nextRecord = csvReader.readNext()) != null){
                 if(nextRecord[0].substring(0,5).equalsIgnoreCase(NIFTY)){
-                    String uuid = UUID.randomUUID().toString();
                     Excel excel = new Excel();
-                    excel.setUuid(uuid);
                     excel.setTicker(nextRecord[0]);
                     excel.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(nextRecord[1]));
                     excel.setTime(nextRecord[2]);
@@ -59,29 +57,30 @@ public class ExcelService {
     }
 
     public void listFilesForFolder(final File folder) throws IOException {
-        List<File> files = new ArrayList<>();
+        long start = System.currentTimeMillis();
         List<Excel> list = new ArrayList<>();
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
                 listFilesForFolder(fileEntry);
             } else {
-                files.add(fileEntry.getAbsoluteFile());
                 list.addAll(readExcel(fileEntry.getAbsoluteFile()));
-//                System.out.println(fileEntry.getName());
+                System.out.println(fileEntry.getName());
             }
         }
 
-        long start = System.currentTimeMillis();
-        Runnable retrieveMetricsJob =(()->
-                list.parallelStream().forEach(listVal->{
-                    excelRepository.save(listVal);
-                }));
-        int poolSize = Runtime.getRuntime().availableProcessors();
-        ForkJoinPool threadPool = new ForkJoinPool(poolSize);
-        threadPool.submit(retrieveMetricsJob);
+        excelRepository.saveAll(list);
+        System.out.println(list.size());
+//        Runnable retrieveMetricsJob =(()->
+//                list.parallelStream().forEach(listVal->{
+//                    excelRepository.save(listVal);
+//                }));
+//        int poolSize = Runtime.getRuntime().availableProcessors();
+//        ForkJoinPool threadPool = new ForkJoinPool(poolSize);
+//        threadPool.submit(retrieveMetricsJob);
+//        threadPool.shutdown();
         long end = System.currentTimeMillis();
         long ans = end-start;
+
         System.out.println("end- start: "+ans);
-        threadPool.shutdown();
     }
 }

@@ -16,12 +16,19 @@ public class ExcelController {
 
     @Autowired
     ExcelService excelService;
+
     @GetMapping("/saveexcel")
     public String saveExcel() throws IOException {
 
-        File file = new File("C:\\koustubh\\coding\\RishiBhaiya2.0\\RishiBhaiya\\src\\main\\resources\\templates");
+        File file = new File("C:\\koustubh\\coding\\rishiBhaiya\\src\\main\\resources\\templates");
         excelService.listFilesForFolder(file);
-
         return "done";
     }
+
+    @GetMapping("/hello")
+    public String getMessage(){
+        System.out.println("hello");
+        return "Hello";
+    }
+
 }
