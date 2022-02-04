@@ -8,11 +8,11 @@
         <version>2.5.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>rishiBhaiya</artifactId>
+    <groupId>com.bolt</groupId>
+    <artifactId>ExcelReader</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rishiBhaiya</name>
-    <description>rishiBhaiya</description>
+    <name>ExcelReader</name>
+    <description>ExcelReader</description>
     <properties>
         <java.version>11</java.version>
     </properties>
