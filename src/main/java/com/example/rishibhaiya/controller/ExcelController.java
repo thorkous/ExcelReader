@@ -20,15 +20,12 @@ public class ExcelController {
     @GetMapping("/saveexcel")
     public String saveExcel() throws IOException {
 
-        File file = new File("C:\\koustubh\\coding\\rishiBhaiya\\src\\main\\resources\\templates");
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath + "\\src\\main\\resources\\templates";
+        File file = new File(filePath);
         excelService.listFilesForFolder(file);
         return "done";
     }
 
-    @GetMapping("/hello")
-    public String getMessage(){
-        System.out.println("hello");
-        return "Hello";
-    }
 
 }
